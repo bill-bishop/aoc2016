@@ -16,10 +16,8 @@ function inputCode (instr) {
   instr.trim().split('\n').forEach(line => {
     [].forEach.call(line, ch => {
       let nextMove = nextMoveMap[key][ch];
-      console.log(`moving ${ch} from ${key} to ${nextMove || key}`);
       key = nextMove || key;
     });
-    console.log(`\t\t\tPressing${key}`);
     code += key;
   });
   return code;
