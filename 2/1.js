@@ -14,7 +14,7 @@ function inputCode (instr) {
   let code = ''
   let key = 5;
   instr.split('\n').forEach(line => {
-    [].forEach.call(line, ch => {
+    line.split('').forEach(ch => {
       let nextMove = nextMoveMap[key][ch];
       key = nextMove || key;
     });
