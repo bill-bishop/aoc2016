@@ -17,7 +17,7 @@ let nextMoveMap = {
 function inputCode (instr) {
   let code = ''
   let key = 5;
-  instr.trim().split('\n').forEach(line => {
+  instr.split('\n').forEach(line => {
     [].forEach.call(line, ch => {
       let nextMove = nextMoveMap[key][ch];
       key = nextMove || key;
