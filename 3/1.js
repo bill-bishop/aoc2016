@@ -1,3 +1,5 @@
+let validTriangle = (a,b,c) => (a+b>c) && (b+c>a) && (c+a>b);
+
 function main(input) {
   return input
     .split('\n')
@@ -5,12 +7,6 @@ function main(input) {
     .reduce(function sumValidTriangles(tot, triangle) {
       return tot += validTriangle.apply(null, triangle);
   }, 0);
-}
-
-function validTriangle(a, b, c) {
-  return a + b > c &&
-    a + c > b &&
-    b + c > a;
 }
 
 module.exports = main;
