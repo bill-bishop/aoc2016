@@ -6,12 +6,12 @@ function main(input) {
   input
     .split('\n')
     .map(line => line.trim().split(/\s+/).map(n => Number(n)))
-    .forEach(function (triangles) {
-      [t1,t2,t3].forEach((t,i) => t.push(triangles[i]));
+    .forEach(function (numbers) {
+      [t1,t2,t3].forEach((triangle, i) => triangle.push(numbers[i]));
 
       if (t1.length !== 3) return;
 
-      [t1,t2,t3].forEach(t => tot += validTriangle(...t));
+      [t1,t2,t3].forEach(triangle => tot += validTriangle(...triangle));
       t1.length = t2.length = t3.length = 0;
     });
 
