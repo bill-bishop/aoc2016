@@ -6,13 +6,11 @@ function main(input) {
   let tot = 0;
 
   input.split('\n').forEach((line, i) => {
-    let sides = line.match(/(\d+)\s+(\d+)\s+(\d+)/);
+    let sides = line.trim().split(/\s+/).map(n => Number(n));
 
-    if (!sides) { return; }
-
-    t1.push(sides[1]);
-    t2.push(sides[2]);
-    t3.push(sides[3]);
+    t1.push(sides[0]);
+    t2.push(sides[1]);
+    t3.push(sides[2]);
 
     if (t1.length === 3) {
       [t1, t2, t3].forEach(triangle => {
@@ -27,10 +25,6 @@ function main(input) {
 }
 
 function validTriangle(a, b, c) {
-  a = Number(a);
-  b = Number(b);
-  c = Number(c);
-
   return a + b > c &&
     a + c > b &&
     b + c > a;
