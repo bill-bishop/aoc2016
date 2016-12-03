@@ -11,9 +11,9 @@ function main(input) {
 
       if (t1.length !== 3) return;
 
-      tot += validTriangle.apply(null, t1);
-      tot += validTriangle.apply(null, t2);
-      tot += validTriangle.apply(null, t3);
+      tot += validTriangle.apply(null, t1) +
+             validTriangle.apply(null, t2) +
+             validTriangle.apply(null, t3);
 
       t1.length = t2.length = t3.length = 0;
     });
