@@ -3,7 +3,7 @@ function main(input) {
     .split('\n')
     .map(line => line.trim().split(/\s+/).map(n => Number(n)))
     .reduce(function sumValidTriangles(tot, triangle) {
-      return tot += Number(validTriangle.apply(null, triangle));
+      return tot += validTriangle.apply(null, triangle);
   }, 0);
 }
 

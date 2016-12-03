@@ -1,27 +1,24 @@
-let t1 = [],
-  t2 = [],
-  t3 = [];
-
 function main(input) {
-  let tot = 0;
+  let tot = 0, t1 = [], t2 = [], t3 = [];
 
-  input.split('\n').forEach((line, i) => {
-    let sides = line.trim().split(/\s+/).map(n => Number(n));
+  input
+    .split('\n')
+    .map(line => line.trim().split(/\s+/).map(n => Number(n)))
+    .forEach(function (triangles) {
+      t1.push(triangles[0]);
+      t2.push(triangles[1]);
+      t3.push(triangles[2]);
 
-    t1.push(sides[0]);
-    t2.push(sides[1]);
-    t3.push(sides[2]);
+      if (t1.length !== 3) return;
 
-    if (t1.length === 3) {
-      [t1, t2, t3].forEach(triangle => {
-        if (validTriangle.apply(null, triangle)) tot++;
-      });
+      tot += validTriangle.apply(null, t1);
+      tot += validTriangle.apply(null, t2);
+      tot += validTriangle.apply(null, t3);
 
       t1.length = t2.length = t3.length = 0;
-    }
+    });
 
-  });
-  return tot;
+    return tot;
 }
 
 function validTriangle(a, b, c) {
