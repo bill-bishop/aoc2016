@@ -11,7 +11,7 @@ function main(input) {
 
       if (t1.length !== 3) return;
 
-      [t1,t2,t3].forEach(t => tot += validTriangle.apply(null, t));
+      [t1,t2,t3].forEach(t => tot += validTriangle(...t));
       t1.length = t2.length = t3.length = 0;
     });
 
