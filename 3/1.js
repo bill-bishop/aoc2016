@@ -1,7 +1,9 @@
 function main(input) {
-  return input.split('\n').reduce(function sumValidTriangles(tot, line) {
-    let sides = line.trim().split(/\s+/).map(n => Number(n));
-    return tot += Number(validTriangle.apply(null, sides));
+  return input
+    .split('\n')
+    .map(line => line.trim().split(/\s+/).map(n => Number(n)))
+    .reduce(function sumValidTriangles(tot, triangle) {
+      return tot += Number(validTriangle.apply(null, triangle));
   }, 0);
 }
 
