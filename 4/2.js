@@ -24,8 +24,4 @@ function shiftChar (ch, n) {
 	return alph[i];
 }
 
-function charCode (str) {
-	return str.charCodeAt(0);
-}
-
 module.exports = main;
