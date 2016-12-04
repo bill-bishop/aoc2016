@@ -7,13 +7,14 @@ function main (input) {
     .forEach((line, i) => {
       let [ encName, secId, checkSum ] = line.match(/(.+)-(\d+)\[(.+?)]/).slice(1);
 
-      let validCheckSum = _.chain(encName.replace(/-/g, '').split(''))
+      let validCheckSum = _(encName)
+        .split('')
+        .pullAll('-')
         .groupBy(0)
         .sortBy(0)
         .sortBy(o => 0-o.length)
         .map(0)
         .join('')
-        .value()
         .substr(0, 5);
 
       console.log(`${encName}, ${secId}, ${checkSum}, ${validCheckSum}`);
