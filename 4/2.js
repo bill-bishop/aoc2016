@@ -1,27 +1,15 @@
+let _ = require('lodash');
+let alph = _.range(97, 123).map(n => String.fromCharCode(n));
+
 function main (input) {
-  let result;
+  _(input).trim().split(/\n/).forEach((line, i) => {
+    let [ encName, secId, checkSum ] = line.match(/(.+)-(\d+)\[(.+?)]/).slice(1);
+    let decName = _(encName)
+      .map(ch => ch == '-' ? ' ' : alph[(alph.indexOf(ch) + Number(secId)) % 26])
+      .join('');
 
-  input.trim().split('\n')
-    .forEach((line, i) => {
-      let [ _, encName, secId, checkSum ] = line.match(/(.+)-(\d+)\[(.+?)]/);
-
-      let decName = encName.split('')
-        .map(ch => shiftChar(ch, secId)).join('');
-
-      if (/north ?pole/i.test(decName)) {
-        result = secId;
-      }
-    });
-
-  return result;
-}
-
-let alph = 'abcdefghijklmnopqrstuvwxyz'.split('');
-
-function shiftChar (ch, n) {
-  if (ch === '-') return ' ';
-  let i = (alph.indexOf(ch) + Number(n)) % alph.length;
-  return alph[i];
+    if (/northpole/.test(decName)) console.log(`${secId}:\t${decName}`);
+  });
 }
 
 module.exports = main;
