@@ -17,8 +17,6 @@ function main (input) {
         .join('')
         .substr(0, 5);
 
-      console.log(`${encName}, ${secId}, ${checkSum}, ${validCheckSum}`);
-
       if (checkSum === validCheckSum) {
         result += Number(secId);
       }
