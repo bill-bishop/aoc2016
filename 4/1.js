@@ -5,8 +5,6 @@ function main (input) {
     .forEach((line, i) => {
       let [ _, encName, secId, checkSum ] = line.match(/(.+)-(\d+)\[(.+?)]/);
 
-      console.log(`${encName}, ${secId}, ${checkSum}, ${fiveHighestChars(encName)}`);
-
       if (fiveHighestChars(encName) === checkSum) {
         result += Number(secId);
       }
