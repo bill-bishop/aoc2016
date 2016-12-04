@@ -25,7 +25,7 @@ function fiveHighestChars (str) {
         // sort the string by the frequency map & alphabetically for ties
         return fq > 0 ? -1 : 
                fq < 0 ?  1 : 
-               a < b ? -1 : 1;
+               a  < b ? -1 : 1;
       }).join('');
 
   // strip non-unique;
