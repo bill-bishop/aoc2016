@@ -1,48 +1,28 @@
+let _ = require('lodash');
+
 function main (input) {
   let result = 0;
 
   input.trim().split('\n')
     .forEach((line, i) => {
-      let [ _, encName, secId, checkSum ] = line.match(/(.+)-(\d+)\[(.+?)]/);
+      let [ encName, secId, checkSum ] = line.match(/(.+)-(\d+)\[(.+?)]/).slice(1);
 
-      if (fiveHighestChars(encName) === checkSum) {
+      let validCheckSum = _.chain(encName.replace(/-/g, '').split(''))
+        .groupBy(0)
+        .sortBy(0)
+        .sortBy(o => 0-o.length)
+        .map(0)
+        .join('')
+        .value()
+        .substr(0, 5);
+
+      console.log(`${encName}, ${secId}, ${checkSum}, ${validCheckSum}`);
+
+      if (checkSum === validCheckSum) {
         result += Number(secId);
       }
     });
 
   return result;
 }
-
-function fiveHighestChars (str) {
-  let fqMap = frequencyMap(str);
-
-  str = str
-      .replace(/-/g, '')
-      .split('')
-      .sort((a,b) => {
-        let fq = fqMap[a] - fqMap[b];
-      
-        // sort the string by the frequency map & alphabetically for ties
-        return fq > 0 ? -1 : 
-               fq < 0 ?  1 : 
-               a  < b ? -1 : 1;
-      }).join('');
-
-  // strip non-unique;
-  str = str.replace(/(.)\1+/g, '$1');
-  return str.substr(0, 5);
-}
-
-function frequencyMap (str) {
-  let map = {};
-
-  str.split('').forEach(ch => {
-    if (ch === '-') return;
-    map[ch] = map[ch] || 0;
-    map[ch] += 1;
-  });
-
-  return map;
-}
-
 module.exports = main;
