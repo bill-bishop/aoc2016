@@ -2,15 +2,15 @@ function main (input) {
 	let result = 0;
 
 	input.trim().split('\n')
-    	.forEach((line, i) => {
-    		let [ _, encName, secId, checkSum ] = line.match(/(.+)-(\d+)\[(.+?)]/);
+		.forEach((line, i) => {
+			let [ _, encName, secId, checkSum ] = line.match(/(.+)-(\d+)\[(.+?)]/);
 
-    		if (fiveHighestChars(encName).join('') === checkSum) {
-    			result += Number(secId);
-    		}
+			if (fiveHighestChars(encName).join('') === checkSum) {
+				result += Number(secId);
+			}
 		});
 
-    return result;
+	return result;
 }
 
 function fiveHighestChars (str) {
