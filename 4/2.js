@@ -8,7 +8,7 @@ function main (input) {
     		let decName = encName.split('')
     			.map(ch => shiftChar(ch, secId)).join('');
 
-    		if (decName.indexOf('northpole') > -1) {
+    		if (/north ?pole/i.test(decName)) {
     			result = secId;
     		}
 		});
