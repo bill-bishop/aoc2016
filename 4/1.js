@@ -5,7 +5,9 @@ function main (input) {
     .forEach((line, i) => {
       let [ _, encName, secId, checkSum ] = line.match(/(.+)-(\d+)\[(.+?)]/);
 
-      if (fiveHighestChars(encName).join('') === checkSum) {
+      console.log(`${encName}, ${secId}, ${checkSum}, ${fiveHighestChars(encName)}`);
+
+      if (fiveHighestChars(encName) === checkSum) {
         result += Number(secId);
       }
     });
@@ -15,15 +17,22 @@ function main (input) {
 
 function fiveHighestChars (str) {
   let fqMap = frequencyMap(str);
-  let result = [];
 
-  for (let i = 0; i < 5; i++) {
-    let ch = highestProp(fqMap);
-    result.push(ch);
-    delete fqMap[ch];
-  }
+  str = str
+      .replace(/-/g, '')
+      .split('')
+      .sort((a,b) => {
+        let fq = fqMap[a] - fqMap[b];
+      
+        // sort the string by the frequency map & alphabetically for ties
+        return fq > 0 ? -1 : 
+               fq < 0 ?  1 : 
+               a < b ? -1 : 1;
+      }).join('');
 
-  return result;
+  // strip non-unique;
+  str = str.replace(/(.)\1+/g, '$1');
+  return str.substr(0, 5);
 }
 
 function frequencyMap (str) {
@@ -36,31 +45,6 @@ function frequencyMap (str) {
   });
 
   return map;
-}
-
-function highestProp (o) {
-  let max = 0;
-  let lowestChar;
-  let result;
-
-  for (let x in o) {
-    if (!lowestChar) {
-      lowestChar = x;
-    }
-
-    if (o[x] > max) {
-      max = o[x];
-      lowestChar = x;
-      result = x;
-    }
-    else if (o[x] === max && x < lowestChar) {
-      max = o[x];
-      lowestChar = x;
-      result = x;
-    }
-  }
-
-  return result;
 }
 
 module.exports = main;
