@@ -20,7 +20,7 @@ function main (input) {
     i++;
   }
 
-  return result;
+  return result.join('');
 }
 
 module.exports = main;
