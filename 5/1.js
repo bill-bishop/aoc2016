@@ -7,28 +7,17 @@ function main (input) {
   input = 'ugkcyxxp';
 
   while (result.length < 8) {
-    let [a, b] = hash(input, i);
+    let h = md5(`${input}${i}`);
 
-    console.log('Found', b, a);
+    if ('00000' === h.substr(0, 5)) {
+      result += h[5].toString();
+      console.log('Found', result);
+    }
 
-    result += a[5].toString();
-    i = b;
+    i++;
   }
 
   return result;
-}
-
-function hash(str, i) {
-  let result = '';
-
-  while ('00000' !== result.substr(0, 5)) {
-    i++;
-    result = md5(str + i);
-
-    if (i % (1000 * 1000) === 0) console.log(i, result);
-  }
-
-  return [result, i];
 }
 
 module.exports = main;
